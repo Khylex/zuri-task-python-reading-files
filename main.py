@@ -5,15 +5,25 @@
 
 def read_file_content(filename):
     # [assignment] Add your code here 
-     with open('./story.txt', 'r') as file:
+     with open(filename, 'r') as file:
        file_content = file.read()
        return file_content
-    
-
-
 
 def count_words():
-    text = read_file_content("./story.txt")
-    # [assignment] Add your code here
-
-    return {"as": 10, "would": 20}
+     import re
+     text = read_file_content("./story.txt")
+     text = text.lower()
+     text = re.sub(r'[^\w]', ' ', text)
+     text = re.sub(' +', ' ', text)
+     textwords = text.split(" ")
+     dictWords = {}
+     for word in textwords:
+       if word in dictWords.keys():
+            dictWords[word] += 1
+       elif word == "":
+            pass
+       else:
+            dictWords[word] = 1
+     print(dictWords)
+     return dictWords
+count_words()
